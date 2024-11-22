@@ -1,0 +1,17 @@
+{
+  "name": "weatherapp",
+  "version": "1.0.0",
+  "description": "Weather Data",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "install": "^0.13.0",
+    "mongodb": "^6.11.0",
+    "npm": "^10.9.1"
+  }
+}
