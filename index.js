@@ -34,14 +34,22 @@ async function setupChangeStream() {
 setupChangeStream();
 
 const server = http.createServer((req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+    if (req.method === "OPTIONS") {
+        res.writeHead(200);
+        res.end();
+        return;
+    }
+
     if (req.url === '/') {
-        fs.readFile(path.join(__dirname, 'public', 'index.html'),
-            (err, content) => {
-                if (err) throw err;
-                res.writeHead(200, { 'Content-Type': 'text/html' });
-                res.end(content);
-            }
-        );
+        fs.readFile(path.join(__dirname, 'public', 'index.html'), (err, content) => {
+            if (err) throw err;
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(content);
+        });
     } else if (req.url.endsWith('.css')) {
         const cssPath = path.join(__dirname, 'public', req.url);
         fs.readFile(cssPath, (err, content) => {
@@ -57,14 +65,11 @@ const server = http.createServer((req, res) => {
             res.end(content);
         });
     } else if (req.url === '/api') {
-        fs.readFile(
-            path.join(__dirname, 'public', 'db.json'), 'utf-8',
-            (err, content) => {
-                if (err) throw err;
-                res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(content);
-            }
-        );
+        fs.readFile(path.join(__dirname, 'public', 'db.json'), 'utf-8', (err, content) => {
+            if (err) throw err;
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.end(content);
+        });
     } else {
         res.writeHead(404, { "Content-Type": "text/html" });
         res.end("<h1>404 - Not Found</h1>");

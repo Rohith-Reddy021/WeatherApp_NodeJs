@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "install": "^0.13.0",
     "mongodb": "^6.11.0",
     "npm": "^10.9.1"
