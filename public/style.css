@@ -29,6 +29,10 @@ html {
     gap: 0.5rem;
 }
 
+header{
+    grid-area: nav;
+}
+
 nav {
     background-color: #2F4F4F; 
     grid-area: nav;
